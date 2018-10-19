@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="item_new_title">#1A0DAB</color>
+    <color name="item_new_author">#006661</color>
+</resources>
