@@ -8,9 +8,16 @@
     tools:context=".main.MvpMainActivity"
     tools:showIn="@layout/activity_mvp_main">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_content"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_content"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </android.support.constraint.ConstraintLayout>

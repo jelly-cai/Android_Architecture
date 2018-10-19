@@ -29,4 +29,25 @@ public class MainPresenter implements MainContract.Presenter {
             }
         });
     }
+
+    /**
+     * 刷新
+     */
+    @Override
+    public void refreshNews() {
+        if (mainModel == null) return;
+        mainModel.getNews(new CommonRequest.MyCallback<NewsList>() {
+            @Override
+            public void onResponse(NewsList response) {
+                if (view == null) return;
+                view.refreshNews(response);
+            }
+
+            @Override
+            public void onFail(int code, String message) {
+
+            }
+        });
+    }
+
 }
