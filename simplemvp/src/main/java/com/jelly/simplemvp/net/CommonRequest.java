@@ -1,7 +1,5 @@
 package com.jelly.simplemvp.net;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -25,7 +23,7 @@ public class CommonRequest {
             = MediaType.parse("application/json; charset=utf-8");
     private static Handler mainHandler = new Handler(Looper.getMainLooper());
 
-    public static <T> void post(String url, Object questBean, final MyCallback<T> callback, final Class<T> tClass) {
+    public static <T> void post(String url, Object questBean, final CommonCallback<T> callback, final Class<T> tClass) {
         RequestBody body = RequestBody.create(JSON, JsonUtils.beanToJson(questBean));
         final Request request = new Request.Builder().url(url).post(body).build();
         Call call = client.newCall(request);
@@ -57,7 +55,7 @@ public class CommonRequest {
     }
 
 
-    public interface MyCallback<T> {
+    public interface CommonCallback<T> {
 
         void onResponse(T response);
 
