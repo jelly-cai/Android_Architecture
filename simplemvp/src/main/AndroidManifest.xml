@@ -7,7 +7,10 @@
             android:name=".main.MvpMainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".content.ReadNewActivity"></activity>
+        <activity
+            android:name=".content.ReadNewActivity"
+            android:label="@string/title_new_content"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

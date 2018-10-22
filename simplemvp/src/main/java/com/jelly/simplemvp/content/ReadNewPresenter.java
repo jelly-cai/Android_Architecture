@@ -7,7 +7,13 @@ public class ReadNewPresenter implements ReadNewContract.Presenter {
 
     private ReadNewModel model;
     private ReadNewContract.View view;
-    private String newId;
+    private int newId;
+
+    public ReadNewPresenter(ReadNewModel model, ReadNewContract.View view, int newId) {
+        this.model = model;
+        this.view = view;
+        this.newId = newId;
+    }
 
     @Override
     public void start() {

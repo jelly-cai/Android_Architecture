@@ -7,19 +7,22 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.jelly.simplemvp.BaseActivity;
 import com.jelly.simplemvp.R;
+import com.jelly.simplemvp.common.listener.RVOnItemClickListener;
+import com.jelly.simplemvp.content.ReadNewActivity;
 import com.jelly.simplemvp.main.bean.NewsList;
 
 public class MvpMainActivity extends BaseActivity implements MainContract.View {
 
-    RecyclerView rvContent;
-    SwipeRefreshLayout swipeContent;
+    private RecyclerView rvContent;
+    private SwipeRefreshLayout swipeContent;
 
-    MainContract.Presenter mainPresenter;
+    private MainContract.Presenter mainPresenter;
 
-    NewsAdapter adapter;
+    private NewsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,9 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
         swipeContent = findViewById(R.id.swipe_content);
     }
 
+    /**
+     * 设置刷新监听器
+     */
     private void initSwipe() {
         swipeContent.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -62,15 +68,22 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
         });
     }
 
+
     @Override
     public void setPresenter(MainContract.Presenter presenter) {
         mainPresenter = presenter;
     }
 
-    private void setAdapter(NewsList newsList) {
+    private void setAdapter(final NewsList newsList) {
         adapter = new NewsAdapter(this, newsList.getData().getNewList());
         rvContent.setLayoutManager(new LinearLayoutManager(this));
         rvContent.setAdapter(adapter);
+        adapter.setItemClickListener(new RVOnItemClickListener() {
+            @Override
+            public void itemClick(View item, int position) {
+                ReadNewActivity.startActivity(MvpMainActivity.this,newsList.getData().getNewList().get(position).getNewID());
+            }
+        });
     }
 
     @Override

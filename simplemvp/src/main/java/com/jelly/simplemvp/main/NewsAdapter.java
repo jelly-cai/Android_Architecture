@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jelly.simplemvp.R;
+import com.jelly.simplemvp.common.listener.RVOnItemClickListener;
 import com.jelly.simplemvp.main.bean.NewsList;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private Context context;
     private List<NewsList.DataBean.NewListBean> newListBeans;
+    private RVOnItemClickListener itemClickListener;
 
     public NewsAdapter(Context context, List<NewsList.DataBean.NewListBean> newListBeans) {
         this.context = context;
@@ -30,6 +32,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         viewHolder.tvAuthor.setText(newListBean.getSourceName());
         viewHolder.tvTime.setText(" - " + newListBean.getPublishTime());
         viewHolder.tvContent.setText(newListBean.getIntro().replace(" ",""));
+
+        viewHolder.itemView.setTag(i);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = (int) view.getTag();
+                itemClickListener.itemClick(view,position);
+            }
+        });
+
     }
 
     @NonNull
@@ -42,6 +54,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public int getItemCount() {
         return newListBeans.size();
     }
+
+    public void setItemClickListener(RVOnItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle;

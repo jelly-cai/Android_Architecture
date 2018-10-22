@@ -2,4 +2,6 @@
 <resources>
     <color name="item_new_title">#1A0DAB</color>
     <color name="item_new_author">#006661</color>
+    <color name="new_content_title_color">#000000</color>
+    <color name="layout_bg">#fffafafa</color>
 </resources>

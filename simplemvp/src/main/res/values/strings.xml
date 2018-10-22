@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SimpleMvp</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">新闻列表</string>
+    <string name="title_new_content">资讯</string>
 </resources>
