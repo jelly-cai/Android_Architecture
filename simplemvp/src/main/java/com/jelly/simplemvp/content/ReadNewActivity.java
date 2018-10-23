@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
@@ -15,17 +13,34 @@ import android.widget.Toast;
 
 import com.jelly.simplemvp.BaseActivity;
 import com.jelly.simplemvp.R;
+import com.jelly.simplemvp.R2;
 import com.jelly.simplemvp.content.bean.NewContent;
 import com.jelly.simplemvp.util.ColorUtils;
+
+import butterknife.BindColor;
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ReadNewActivity extends BaseActivity implements ReadNewContract.View {
 
     public static final String TAG = "ReadNewActivity";
+    @BindView(R2.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R2.id.tv_title)
+    TextView tvTitle;
+    @BindView(R2.id.tv_time)
+    TextView tvTime;
+    @BindView(R2.id.tv_author)
+    TextView tvAuthor;
+    @BindView(R2.id.wv_content)
+    WebView wvContent;
 
-    private TextView tvTitle;
-    private TextView tvTime;
-    private TextView tvAuthor;
-    private WebView wvContent;
+    @BindString(R2.string.new_content_html_format)
+    String htmlFormat;
+    @BindColor(R2.color.layout_bg)
+    int layoutBg;
+
     private ReadNewContract.Presenter presenter;
     private int newId = -1;
 
@@ -35,13 +50,13 @@ public class ReadNewActivity extends BaseActivity implements ReadNewContract.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_new);
+        ButterKnife.bind(this);
         init();
     }
 
     @Override
     protected void init() {
         initToolBar();
-        findViews();
         getIntentData();
         setPresenter(new ReadNewPresenter(new ReadNewModel(), this, newId));
         presenter.start();
@@ -54,7 +69,7 @@ public class ReadNewActivity extends BaseActivity implements ReadNewContract.Vie
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
+        if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -66,12 +81,6 @@ public class ReadNewActivity extends BaseActivity implements ReadNewContract.Vie
         }
     }
 
-    private void findViews() {
-        tvTitle = findViewById(R.id.tv_title);
-        tvTime = findViewById(R.id.tv_time);
-        wvContent = findViewById(R.id.wv_content);
-        tvAuthor = findViewById(R.id.tv_author);
-    }
 
     private void getIntentData() {
         Intent intent = getIntent();
@@ -101,7 +110,7 @@ public class ReadNewActivity extends BaseActivity implements ReadNewContract.Vie
     private void setWebView(String html) {
         wvContent.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         wvContent.getSettings().setSupportZoom(false);
-        String data = "<div background-color:" + ColorUtils.changeColor(ContextCompat.getColor(this, R.color.layout_bg)) + ">" + html + "</div>";
+        String data = String.format(htmlFormat,ColorUtils.changeColor(layoutBg),html);
         wvContent.loadData(data, "text/html;charset=UTF-8", null);
     }
 

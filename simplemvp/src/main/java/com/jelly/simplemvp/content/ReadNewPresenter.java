@@ -1,4 +1,5 @@
 package com.jelly.simplemvp.content;
+import android.support.annotation.NonNull;
 
 import com.jelly.simplemvp.content.bean.NewContent;
 import com.jelly.simplemvp.net.CommonRequest;
@@ -9,7 +10,7 @@ public class ReadNewPresenter implements ReadNewContract.Presenter {
     private ReadNewContract.View view;
     private int newId;
 
-    public ReadNewPresenter(ReadNewModel model, ReadNewContract.View view, int newId) {
+    public ReadNewPresenter(@NonNull ReadNewModel model,@NonNull ReadNewContract.View view,@NonNull int newId) {
         this.model = model;
         this.view = view;
         this.newId = newId;

@@ -11,14 +11,23 @@ import android.view.View;
 
 import com.jelly.simplemvp.BaseActivity;
 import com.jelly.simplemvp.R;
+import com.jelly.simplemvp.R2;
 import com.jelly.simplemvp.common.listener.RVOnItemClickListener;
 import com.jelly.simplemvp.content.ReadNewActivity;
 import com.jelly.simplemvp.main.bean.NewsList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MvpMainActivity extends BaseActivity implements MainContract.View {
 
-    private RecyclerView rvContent;
-    private SwipeRefreshLayout swipeContent;
+
+    @BindView(R2.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R2.id.rv_content)
+    RecyclerView rvContent;
+    @BindView(R2.id.swipe_content)
+    SwipeRefreshLayout swipeContent;
 
     private MainContract.Presenter mainPresenter;
 
@@ -28,13 +37,13 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mvp_main);
+        ButterKnife.bind(this);
         init();
     }
 
     @Override
     protected void init() {
         initToolBar();
-        findViews();
         initSwipe();
         setPresenter(new MainPresenter(new MainModel(), this));
         mainPresenter.start();
@@ -44,16 +53,7 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
      * 初始化ToolBar
      */
     private void initToolBar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-    }
-
-    /**
-     * 获取view
-     */
-    private void findViews() {
-        rvContent = findViewById(R.id.rv_content);
-        swipeContent = findViewById(R.id.swipe_content);
     }
 
     /**
@@ -81,7 +81,7 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
         adapter.setItemClickListener(new RVOnItemClickListener() {
             @Override
             public void itemClick(View item, int position) {
-                ReadNewActivity.startActivity(MvpMainActivity.this,newsList.getData().getNewList().get(position).getNewID());
+                ReadNewActivity.startActivity(MvpMainActivity.this, newsList.getData().getNewList().get(position).getNewID());
             }
         });
     }
