@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">SimpleMvp</string>
-    <string name="title_activity_main">新闻列表</string>
-    <string name="title_new_content">资讯</string>
-    <string name="new_content_html_format">"<![CDATA[<body style=\"background-color:%s;\"><div>%s</div></body>]]>"</string>
-</resources>
