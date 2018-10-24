@@ -32,8 +32,6 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
 
     private MainContract.Presenter mainPresenter;
 
-    private NewsAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +74,7 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
     }
 
     private void setAdapter(final NewsList newsList) {
-        adapter = new NewsAdapter(this, newsList.getData().getNewList());
+        NewsAdapter adapter = new NewsAdapter(this, newsList.getData().getNewList());
         rvContent.setLayoutManager(new LinearLayoutManager(this));
         rvContent.setAdapter(adapter);
         adapter.setItemClickListener(new RVOnItemClickListener() {
@@ -95,6 +93,12 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
     @Override
     public void refreshNews(NewsList newsList) {
         setAdapter(newsList);
+        swipeContent.setRefreshing(false);
+    }
+
+    @Override
+    public void httpFail(int code, String message) {
+        showToast(message);
         swipeContent.setRefreshing(false);
     }
 

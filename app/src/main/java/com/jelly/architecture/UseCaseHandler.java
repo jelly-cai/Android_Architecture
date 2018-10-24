@@ -22,16 +22,16 @@ public class UseCaseHandler {
         return INSTANCE;
     }
 
-    public <R, T> void execute(UseCase<R, T> useCase, R request, UseCase.UserCaseCallBack<T> callBack) {
+    public <R, T> void execute(UseCase<R, T> useCase, R request, UseCase.UseCaseCallBack<T> callBack) {
         useCase.setCallBack(new UiCallBackWrapper<T>(callBack));
         useCase.execute(request);
     }
 
-    private static final class UiCallBackWrapper<T> implements UseCase.UserCaseCallBack<T> {
+    private static final class UiCallBackWrapper<T> implements UseCase.UseCaseCallBack<T> {
 
-        private final UseCase.UserCaseCallBack<T> callBack;
+        private final UseCase.UseCaseCallBack<T> callBack;
 
-        private UiCallBackWrapper(UseCase.UserCaseCallBack<T> callBack) {
+        private UiCallBackWrapper(UseCase.UseCaseCallBack<T> callBack) {
             this.callBack = callBack;
         }
 

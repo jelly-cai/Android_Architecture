@@ -2,9 +2,12 @@ package com.jelly.datalayer;
 
 
 
+import com.jelly.tool.Codes;
 import com.jelly.tool.JsonUtils;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -16,7 +19,12 @@ import okhttp3.Response;
 
 public class CommonRequest {
 
-    private static OkHttpClient client = new OkHttpClient();
+    private static OkHttpClient client;
+
+    static {
+        client = new OkHttpClient.Builder().connectTimeout(10,TimeUnit.SECONDS).build();
+    }
+
     private static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
 
@@ -27,7 +35,7 @@ public class CommonRequest {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+                callback.onFail(Codes.NET_ERROR, "网络请求异常");
             }
 
             @Override

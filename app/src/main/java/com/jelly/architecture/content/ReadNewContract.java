@@ -12,6 +12,7 @@ public interface ReadNewContract {
 
     interface View extends BaseView<Presenter> {
         void showContent(NewContent content);
+        void httpFail(int code,String message);
     }
 
 }

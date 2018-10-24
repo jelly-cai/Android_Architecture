@@ -23,9 +23,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void start() {
-        if (getNewsUseCase == null) return;
-        NewsListRequest request = getNewsUseCase.createNewsListRequest();
-        useCaseHandler.execute(getNewsUseCase, request, new UseCase.UserCaseCallBack<NewsList>() {
+        getNews(new UseCase.UseCaseCallBack<NewsList>() {
             @Override
             public void onSuccess(NewsList response) {
                 if (view != null) {
@@ -35,20 +33,19 @@ public class MainPresenter implements MainContract.Presenter {
 
             @Override
             public void onFail(int code, String message) {
-
+                if(view != null){
+                    view.httpFail(code,message);
+                }
             }
         });
     }
-
 
     /**
      * 刷新
      */
     @Override
     public void refreshNews() {
-        if (getNewsUseCase == null) return;
-        NewsListRequest request = getNewsUseCase.createNewsListRequest();
-        useCaseHandler.execute(getNewsUseCase, request, new UseCase.UserCaseCallBack<NewsList>() {
+        getNews(new UseCase.UseCaseCallBack<NewsList>() {
             @Override
             public void onSuccess(NewsList response) {
                 if (view != null) {
@@ -58,9 +55,18 @@ public class MainPresenter implements MainContract.Presenter {
 
             @Override
             public void onFail(int code, String message) {
-
+                if(view != null){
+                    view.httpFail(code,message);
+                }
             }
         });
+    }
+
+    private void getNews(UseCase.UseCaseCallBack caseCallBack){
+        if(getNewsUseCase != null){
+            NewsListRequest request = getNewsUseCase.createNewsListRequest();
+            useCaseHandler.execute(getNewsUseCase,request,caseCallBack);
+        }
     }
 
 }

@@ -2,9 +2,9 @@ package com.jelly.domainlayer;
 
 public abstract class UseCase<R,T> {
 
-    private UserCaseCallBack<T> callBack;
+    private UseCaseCallBack<T> callBack;
 
-    public interface UserCaseCallBack<T> {
+    public interface UseCaseCallBack<T> {
         void onSuccess(T response);
 
         void onFail(int code, String message);
@@ -12,11 +12,11 @@ public abstract class UseCase<R,T> {
 
     public abstract void execute(R request);
 
-    public void setCallBack(UserCaseCallBack<T> callBack) {
+    public void setCallBack(UseCaseCallBack<T> callBack) {
         this.callBack = callBack;
     }
 
-    public UserCaseCallBack<T> getCallBack() {
+    public UseCaseCallBack<T> getCallBack() {
         return callBack;
     }
 }

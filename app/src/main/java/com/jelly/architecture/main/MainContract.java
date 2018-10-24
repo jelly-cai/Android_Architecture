@@ -9,6 +9,7 @@ public interface MainContract {
     interface View extends BaseView<Presenter> {
         void showNews(NewsList newsList);
         void refreshNews(NewsList newsList);
+        void httpFail(int code,String message);
     }
 
     interface Presenter extends BasePresenter {

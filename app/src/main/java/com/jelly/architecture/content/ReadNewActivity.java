@@ -8,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jelly.architecture.BaseActivity;
 import com.jelly.architecture.R;
@@ -24,7 +23,6 @@ import butterknife.ButterKnife;
 
 public class ReadNewActivity extends BaseActivity implements ReadNewContract.View {
 
-    public static final String TAG = "ReadNewActivity";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.tv_title)
@@ -89,7 +87,7 @@ public class ReadNewActivity extends BaseActivity implements ReadNewContract.Vie
         }
         newId = getIntent().getIntExtra(NEWID_KEY, -1);
         if (newId == -1) {
-            Toast.makeText(this, "newId不能为空", Toast.LENGTH_SHORT).show();
+            showToast("newId不能为空");
             finish();
         }
     }
@@ -105,6 +103,11 @@ public class ReadNewActivity extends BaseActivity implements ReadNewContract.Vie
         tvTime.setText(content.getData().getPublishTime());
         tvAuthor.setText(content.getData().getSourceName());
         setWebView(content.getData().getNewContent());
+    }
+
+    @Override
+    public void httpFail(int code, String message) {
+        showToast(message);
     }
 
     private void setWebView(String html) {

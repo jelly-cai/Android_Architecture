@@ -24,7 +24,7 @@ public class ReadNewPresenter implements ReadNewContract.Presenter {
     @Override
     public void start() {
         NewContentRequest request = getNewContentUseCase.createNewContent(newId);
-        useCaseHandler.execute(getNewContentUseCase, request, new UseCase.UserCaseCallBack<NewContent>() {
+        useCaseHandler.execute(getNewContentUseCase, request, new UseCase.UseCaseCallBack<NewContent>() {
             @Override
             public void onSuccess(NewContent response) {
                 if(view == null) return;
@@ -33,7 +33,9 @@ public class ReadNewPresenter implements ReadNewContract.Presenter {
 
             @Override
             public void onFail(int code, String message) {
-
+                if(view != null){
+                    view.httpFail(code,message);
+                }
             }
         });
     }
