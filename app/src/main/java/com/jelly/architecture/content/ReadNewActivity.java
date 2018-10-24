@@ -12,8 +12,10 @@ import android.widget.Toast;
 
 import com.jelly.architecture.BaseActivity;
 import com.jelly.architecture.R;
-import com.jelly.architecture.content.bean.NewContent;
+import com.jelly.architecture.UseCaseHandler;
 import com.jelly.architecture.util.ColorUtils;
+import com.jelly.domian.news.GetNewContentUseCase;
+import com.jelly.domian.news.bean.NewContent;
 
 import butterknife.BindColor;
 import butterknife.BindString;
@@ -56,7 +58,7 @@ public class ReadNewActivity extends BaseActivity implements ReadNewContract.Vie
     protected void init() {
         initToolBar();
         getIntentData();
-        setPresenter(new ReadNewPresenter(new ReadNewModel(), this, newId));
+        setPresenter(new ReadNewPresenter(UseCaseHandler.getInstance(), new GetNewContentUseCase(), this, newId));
         presenter.start();
     }
 
@@ -108,7 +110,7 @@ public class ReadNewActivity extends BaseActivity implements ReadNewContract.Vie
     private void setWebView(String html) {
         wvContent.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         wvContent.getSettings().setSupportZoom(false);
-        String data = String.format(htmlFormat,ColorUtils.changeColor(layoutBg),html);
+        String data = String.format(htmlFormat, ColorUtils.changeColor(layoutBg), html);
         wvContent.loadData(data, "text/html;charset=UTF-8", null);
     }
 

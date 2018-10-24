@@ -2,7 +2,7 @@ package com.jelly.architecture.main;
 
 import com.jelly.architecture.BasePresenter;
 import com.jelly.architecture.BaseView;
-import com.jelly.architecture.main.bean.NewsList;
+import com.jelly.domian.news.bean.NewsList;
 
 public interface MainContract {
 

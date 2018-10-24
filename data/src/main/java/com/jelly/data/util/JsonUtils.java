@@ -1,4 +1,4 @@
-package com.jelly.architecture.util;
+package com.jelly.data.util;
 
 import com.google.gson.Gson;
 

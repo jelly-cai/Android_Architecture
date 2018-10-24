@@ -1,4 +1,4 @@
-package com.jelly.architecture.content.bean;
+package com.jelly.domian.news.bean;
 
 import java.util.List;
 

@@ -11,9 +11,11 @@ import android.view.View;
 
 import com.jelly.architecture.BaseActivity;
 import com.jelly.architecture.R;
+import com.jelly.architecture.UseCaseHandler;
 import com.jelly.architecture.content.ReadNewActivity;
 import com.jelly.architecture.listener.RVOnItemClickListener;
-import com.jelly.architecture.main.bean.NewsList;
+import com.jelly.domian.news.GetNewsUseCase;
+import com.jelly.domian.news.bean.NewsList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,7 +46,7 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
     protected void init() {
         initToolBar();
         initSwipe();
-        setPresenter(new MainPresenter(new MainModel(), this));
+        setPresenter(new MainPresenter(UseCaseHandler.getInstance(),new GetNewsUseCase(), this));
         mainPresenter.start();
     }
 

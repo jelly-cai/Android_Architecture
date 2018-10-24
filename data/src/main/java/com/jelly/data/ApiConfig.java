@@ -1,4 +1,4 @@
-package com.jelly.architecture.net;
+package com.jelly.data;
 
 public class ApiConfig {
 

@@ -1,4 +1,4 @@
-package com.jelly.architecture.main.bean;
+package com.jelly.domian.news.bean;
 
 public class NewsListRequest {
 
