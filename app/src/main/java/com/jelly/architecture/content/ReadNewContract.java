@@ -2,7 +2,7 @@ package com.jelly.architecture.content;
 
 import com.jelly.architecture.BasePresenter;
 import com.jelly.architecture.BaseView;
-import com.jelly.domian.news.bean.NewContent;
+import com.jelly.domainlayer.news.bean.NewContent;
 
 public interface ReadNewContract {
 

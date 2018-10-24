@@ -2,7 +2,7 @@ package com.jelly.architecture;
 
 import android.os.Handler;
 
-import com.jelly.domian.UseCase;
+import com.jelly.domainlayer.UseCase;
 
 
 public class UseCaseHandler {

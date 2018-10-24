@@ -2,10 +2,10 @@ package com.jelly.architecture.content;
 import android.support.annotation.NonNull;
 
 import com.jelly.architecture.UseCaseHandler;
-import com.jelly.domian.UseCase;
-import com.jelly.domian.news.GetNewContentUseCase;
-import com.jelly.domian.news.bean.NewContent;
-import com.jelly.domian.news.bean.NewContentRequest;
+import com.jelly.domainlayer.UseCase;
+import com.jelly.domainlayer.news.GetNewContentUseCase;
+import com.jelly.domainlayer.news.bean.NewContent;
+import com.jelly.domainlayer.news.bean.NewContentRequest;
 
 public class ReadNewPresenter implements ReadNewContract.Presenter {
 

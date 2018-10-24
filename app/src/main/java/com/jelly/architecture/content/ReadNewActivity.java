@@ -13,9 +13,9 @@ import android.widget.Toast;
 import com.jelly.architecture.BaseActivity;
 import com.jelly.architecture.R;
 import com.jelly.architecture.UseCaseHandler;
-import com.jelly.architecture.util.ColorUtils;
-import com.jelly.domian.news.GetNewContentUseCase;
-import com.jelly.domian.news.bean.NewContent;
+import com.jelly.domainlayer.news.GetNewContentUseCase;
+import com.jelly.domainlayer.news.bean.NewContent;
+import com.jelly.tool.ColorUtils;
 
 import butterknife.BindColor;
 import butterknife.BindString;

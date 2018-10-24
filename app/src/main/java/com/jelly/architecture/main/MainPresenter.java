@@ -2,10 +2,10 @@ package com.jelly.architecture.main;
 
 
 import com.jelly.architecture.UseCaseHandler;
-import com.jelly.domian.UseCase;
-import com.jelly.domian.news.GetNewsUseCase;
-import com.jelly.domian.news.bean.NewsList;
-import com.jelly.domian.news.bean.NewsListRequest;
+import com.jelly.domainlayer.UseCase;
+import com.jelly.domainlayer.news.GetNewsUseCase;
+import com.jelly.domainlayer.news.bean.NewsList;
+import com.jelly.domainlayer.news.bean.NewsListRequest;
 
 public class MainPresenter implements MainContract.Presenter {
 

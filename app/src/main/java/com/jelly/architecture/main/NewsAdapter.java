@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import com.jelly.architecture.R;
 import com.jelly.architecture.listener.RVOnItemClickListener;
-import com.jelly.domian.news.bean.NewsList;
+import com.jelly.domainlayer.news.bean.NewsList;
+
 
 import java.util.List;
 

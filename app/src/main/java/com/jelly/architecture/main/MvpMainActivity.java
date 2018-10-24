@@ -14,8 +14,8 @@ import com.jelly.architecture.R;
 import com.jelly.architecture.UseCaseHandler;
 import com.jelly.architecture.content.ReadNewActivity;
 import com.jelly.architecture.listener.RVOnItemClickListener;
-import com.jelly.domian.news.GetNewsUseCase;
-import com.jelly.domian.news.bean.NewsList;
+import com.jelly.domainlayer.news.GetNewsUseCase;
+import com.jelly.domainlayer.news.bean.NewsList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
