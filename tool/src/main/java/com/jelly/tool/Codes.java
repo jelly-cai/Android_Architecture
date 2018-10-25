@@ -14,5 +14,9 @@ public class Codes {
      * 网络错
      */
     public static final int NET_ERROR = 408;
+    /**
+     * 读取本地数据错误
+     */
+    public static final int LOCAL_ERROR = 409;
 
 }

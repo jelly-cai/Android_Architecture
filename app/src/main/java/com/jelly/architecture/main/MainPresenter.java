@@ -6,6 +6,7 @@ import com.jelly.domainlayer.UseCase;
 import com.jelly.domainlayer.news.GetNewsUseCase;
 import com.jelly.domainlayer.news.bean.NewsList;
 import com.jelly.domainlayer.news.bean.NewsListRequest;
+import com.jelly.tool.RequestMethod;
 
 public class MainPresenter implements MainContract.Presenter {
 
@@ -23,6 +24,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void start() {
+        getNewsUseCase.setMethod(RequestMethod.LOCAL_REMOTE_CACHE);
         getNews(new UseCase.UseCaseCallBack<NewsList>() {
             @Override
             public void onSuccess(NewsList response) {
@@ -45,6 +47,7 @@ public class MainPresenter implements MainContract.Presenter {
      */
     @Override
     public void refreshNews() {
+        getNewsUseCase.setMethod(RequestMethod.REMOTE_ONLY);
         getNews(new UseCase.UseCaseCallBack<NewsList>() {
             @Override
             public void onSuccess(NewsList response) {

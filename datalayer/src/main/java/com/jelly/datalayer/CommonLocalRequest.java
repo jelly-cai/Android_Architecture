@@ -2,61 +2,41 @@ package com.jelly.datalayer;
 
 
 
+import android.content.Context;
+import android.text.TextUtils;
+
+import com.jelly.timecache.TimeCache;
 import com.jelly.tool.Codes;
-import com.jelly.tool.JsonUtils;
 
-import java.io.IOException;
-import java.net.UnknownHostException;
-import java.util.concurrent.TimeUnit;
+import java.sql.Time;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import static com.jelly.tool.Codes.LOCAL_ERROR;
 
-public class CommonRemoteRequest {
+public class CommonLocalRequest {
 
-    private static OkHttpClient client;
+    TimeCache timeCache;
 
-    static {
-        client = new OkHttpClient.Builder().connectTimeout(10,TimeUnit.SECONDS).build();
+    public CommonLocalRequest(Context context){
+        timeCache = TimeCache.newTimeCache(context);
     }
 
-    private static final MediaType JSON
-            = MediaType.parse("application/json; charset=utf-8");
+    public void putJson(String key,String json){
+        timeCache.put(key,json);
+    }
 
-    public static void post(String url, Object questBean, final CommonCallback callback) {
-        RequestBody body = RequestBody.create(JSON, JsonUtils.beanToJson(questBean));
-        final Request request = new Request.Builder().url(url).post(body).build();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                callback.onFail(Codes.NET_ERROR, "网络请求异常");
+    public void getJson(String key,CommonCallback callback){
+        String json = null;
+        try {
+            json = timeCache.getString(key);
+            callback.onResponse(json);
+        }catch (Exception e){
+            callback.onFail(LOCAL_ERROR,"获取本地缓存数据错误");
+        }finally {
+            if(TextUtils.isEmpty(json)){
+                callback.onFail(Codes.CONTENT_EMPTY,"内容为空");
             }
-
-            @Override
-            public void onResponse(Call call,Response response) throws IOException {
-                if (response.body() != null) {
-                    callback.onResponse(response.body().string());
-                } else {
-                    callback.onFail(Codes.CONTENT_EMPTY, "响应内容为空");
-                }
-
-            }
-        });
+        }
     }
 
-
-    public interface CommonCallback {
-
-        void onResponse(String response);
-
-        void onFail(int code, String message);
-
-    }
 
 }

@@ -6,6 +6,7 @@ import com.jelly.domainlayer.UseCase;
 import com.jelly.domainlayer.news.GetNewContentUseCase;
 import com.jelly.domainlayer.news.bean.NewContent;
 import com.jelly.domainlayer.news.bean.NewContentRequest;
+import com.jelly.tool.RequestMethod;
 
 public class ReadNewPresenter implements ReadNewContract.Presenter {
 
@@ -23,6 +24,7 @@ public class ReadNewPresenter implements ReadNewContract.Presenter {
 
     @Override
     public void start() {
+        getNewContentUseCase.setMethod(RequestMethod.REMOTE_ONLY);
         NewContentRequest request = getNewContentUseCase.createNewContent(newId);
         useCaseHandler.execute(getNewContentUseCase, request, new UseCase.UseCaseCallBack<NewContent>() {
             @Override

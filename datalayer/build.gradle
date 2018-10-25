@@ -35,4 +35,6 @@ dependencies {
 
     //okhttp
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    //缓存
+    implementation 'com.jelly:timecache:1.0.1'
 }

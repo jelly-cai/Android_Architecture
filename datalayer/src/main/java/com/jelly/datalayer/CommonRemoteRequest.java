@@ -17,7 +17,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class CommonRequest {
+public class CommonRemoteRequest {
 
     private static OkHttpClient client;
 
@@ -51,12 +51,6 @@ public class CommonRequest {
     }
 
 
-    public interface CommonCallback {
 
-        void onResponse(String response);
-
-        void onFail(int code, String message);
-
-    }
 
 }

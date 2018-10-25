@@ -1,7 +1,14 @@
 package com.jelly.domainlayer.news;
 
-import com.jelly.datalayer.CommonRequest;
+import android.content.Context;
+
+import com.jelly.datalayer.CommonCallback;
+import com.jelly.datalayer.CommonLocalRequest;
+import com.jelly.datalayer.CommonRemoteRequest;
+import com.jelly.datalayer.Repository;
+import com.jelly.datalayer.news.NewsLocalDataSource;
 import com.jelly.datalayer.news.NewsRemoteDataSource;
+import com.jelly.datalayer.news.NewsRepository;
 import com.jelly.domainlayer.UseCase;
 import com.jelly.domainlayer.news.bean.NewsList;
 import com.jelly.domainlayer.news.bean.NewsListRequest;
@@ -9,14 +16,16 @@ import com.jelly.tool.JsonUtils;
 
 public class GetNewsUseCase extends UseCase<NewsListRequest,NewsList> {
 
-    private final NewsRemoteDataSource<NewsListRequest> dataSource = new NewsRemoteDataSource<>();
+    private final NewsRepository<NewsListRequest> newsRepository;
 
-    public GetNewsUseCase() {
+    public GetNewsUseCase(Context context) {
+        super(context);
+        newsRepository = new NewsRepository<>(new NewsLocalDataSource<NewsListRequest>(new CommonLocalRequest(context)),new NewsRemoteDataSource<NewsListRequest>());
     }
 
     @Override
     public void execute(NewsListRequest request) {
-        dataSource.getNews(request, new CommonRequest.CommonCallback() {
+        newsRepository.getNews(request, new CommonCallback() {
             @Override
             public void onResponse(String response) {
                 getCallBack().onSuccess(JsonUtils.jsonToBean(response,NewsList.class));
@@ -27,6 +36,11 @@ public class GetNewsUseCase extends UseCase<NewsListRequest,NewsList> {
                 getCallBack().onFail(code,message);
             }
         });
+    }
+
+    @Override
+    public void setMethod(int method) {
+        newsRepository.setMethod(method);
     }
 
     public NewsListRequest createNewsListRequest(){

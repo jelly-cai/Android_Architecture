@@ -56,7 +56,7 @@ public class ReadNewActivity extends BaseActivity implements ReadNewContract.Vie
     protected void init() {
         initToolBar();
         getIntentData();
-        setPresenter(new ReadNewPresenter(UseCaseHandler.getInstance(), new GetNewContentUseCase(), this, newId));
+        setPresenter(new ReadNewPresenter(UseCaseHandler.getInstance(), new GetNewContentUseCase(this), this, newId));
         presenter.start();
     }
 

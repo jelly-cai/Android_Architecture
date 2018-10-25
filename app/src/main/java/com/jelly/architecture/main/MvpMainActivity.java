@@ -44,7 +44,7 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
     protected void init() {
         initToolBar();
         initSwipe();
-        setPresenter(new MainPresenter(UseCaseHandler.getInstance(),new GetNewsUseCase(), this));
+        setPresenter(new MainPresenter(UseCaseHandler.getInstance(),new GetNewsUseCase(this), this));
         mainPresenter.start();
     }
 
