@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import com.jelly.timecache.TimeCache;
 import com.jelly.tool.Codes;
 
-import java.sql.Time;
 
 import static com.jelly.tool.Codes.LOCAL_ERROR;
 
