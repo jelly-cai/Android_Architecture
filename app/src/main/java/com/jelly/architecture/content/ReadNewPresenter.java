@@ -19,6 +19,9 @@ public class ReadNewPresenter implements ReadNewContract.Presenter {
     }
 
     private void start() {
+        if(model == null){
+            return;
+        }
         model.getNewContent(newId, new CommonRequest.CommonCallback<NewContent>() {
             @Override
             public void onResponse(NewContent response) {

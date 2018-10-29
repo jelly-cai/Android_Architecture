@@ -8,6 +8,9 @@ import com.jelly.architecture.util.JsonUtils;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -16,14 +19,19 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+@Singleton
 public class CommonRequest {
 
-    private static OkHttpClient client = new OkHttpClient();
-    private static final MediaType JSON
+    private OkHttpClient client = new OkHttpClient();
+    private final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
-    private static Handler mainHandler = new Handler(Looper.getMainLooper());
+    private Handler mainHandler = new Handler(Looper.getMainLooper());
 
-    public static <T> void post(String url, Object questBean, final CommonCallback<T> callback, final Class<T> tClass) {
+    @Inject
+    public CommonRequest(){
+    }
+
+    public <T> void post(String url, Object questBean, final CommonCallback<T> callback, final Class<T> tClass) {
         RequestBody body = RequestBody.create(JSON, JsonUtils.beanToJson(questBean));
         final Request request = new Request.Builder().url(url).post(body).build();
         Call call = client.newCall(request);

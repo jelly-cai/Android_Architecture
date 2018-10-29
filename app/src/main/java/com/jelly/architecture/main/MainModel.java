@@ -5,14 +5,12 @@ import com.jelly.architecture.main.bean.NewsListRequest;
 import com.jelly.architecture.net.ApiConfig;
 import com.jelly.architecture.net.CommonRequest;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-@Singleton
 public class MainModel {
 
-    @Inject
-    public MainModel(){
+    CommonRequest commonRequest;
+
+    public MainModel(CommonRequest commonRequest){
+        this.commonRequest = commonRequest;
     }
 
     public void getNews(CommonRequest.CommonCallback<NewsList> callback){
@@ -26,7 +24,7 @@ public class MainModel {
         request.setMarket(2004);
         request.setCode("00763");
         request.setImgType(1);
-        CommonRequest.post(ApiConfig.NEW, request, callback, NewsList.class);
+        commonRequest.post(ApiConfig.NEW, request, callback, NewsList.class);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.jelly.architecture.di;
 
+
 import com.jelly.architecture.MyApplication;
 
 import javax.inject.Singleton;
