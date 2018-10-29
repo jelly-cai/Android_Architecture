@@ -15,6 +15,8 @@ import com.jelly.architecture.R;
 import com.jelly.architecture.content.bean.NewContent;
 import com.jelly.architecture.util.ColorUtils;
 
+import javax.inject.Inject;
+
 import butterknife.BindColor;
 import butterknife.BindString;
 import butterknife.BindView;
@@ -39,10 +41,10 @@ public class ReadNewActivity extends BaseActivity implements ReadNewContract.Vie
     @BindColor(R.color.layout_bg)
     int layoutBg;
 
-    private ReadNewContract.Presenter presenter;
-    private int newId = -1;
+    @Inject
+    ReadNewContract.Presenter presenter;
 
-    private static final String NEWID_KEY = "newId";
+    public static final String NEWID_KEY = "newId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +57,7 @@ public class ReadNewActivity extends BaseActivity implements ReadNewContract.Vie
     @Override
     protected void init() {
         initToolBar();
-        getIntentData();
-        setPresenter(new ReadNewPresenter(new ReadNewModel(), this, newId));
-        presenter.start();
+        presenter.takeView(this);
     }
 
     /**
@@ -77,24 +77,6 @@ public class ReadNewActivity extends BaseActivity implements ReadNewContract.Vie
                 }
             });
         }
-    }
-
-
-    private void getIntentData() {
-        Intent intent = getIntent();
-        if (intent == null) {
-            throw new NullPointerException("Intent为空");
-        }
-        newId = getIntent().getIntExtra(NEWID_KEY, -1);
-        if (newId == -1) {
-            Toast.makeText(this, "newId不能为空", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-    }
-
-    @Override
-    public void setPresenter(ReadNewContract.Presenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override

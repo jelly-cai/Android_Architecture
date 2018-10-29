@@ -15,6 +15,8 @@ import com.jelly.architecture.content.ReadNewActivity;
 import com.jelly.architecture.listener.RVOnItemClickListener;
 import com.jelly.architecture.main.bean.NewsList;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -28,7 +30,8 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
     @BindView(R.id.swipe_content)
     SwipeRefreshLayout swipeContent;
 
-    private MainContract.Presenter mainPresenter;
+    @Inject
+    MainContract.Presenter mainPresenter;
 
     private NewsAdapter adapter;
 
@@ -44,8 +47,7 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
     protected void init() {
         initToolBar();
         initSwipe();
-        setPresenter(new MainPresenter(new MainModel(), this));
-        mainPresenter.start();
+        mainPresenter.takeView(this);
     }
 
     /**
@@ -65,12 +67,6 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
                 mainPresenter.refreshNews();
             }
         });
-    }
-
-
-    @Override
-    public void setPresenter(MainContract.Presenter presenter) {
-        mainPresenter = presenter;
     }
 
     private void setAdapter(final NewsList newsList) {

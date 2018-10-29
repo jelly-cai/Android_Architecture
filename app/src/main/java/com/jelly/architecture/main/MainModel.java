@@ -5,9 +5,15 @@ import com.jelly.architecture.main.bean.NewsListRequest;
 import com.jelly.architecture.net.ApiConfig;
 import com.jelly.architecture.net.CommonRequest;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
 public class MainModel {
 
-    public static final String TAG = "MainModel";
+    @Inject
+    public MainModel(){
+    }
 
     public void getNews(CommonRequest.CommonCallback<NewsList> callback){
         NewsListRequest request = new NewsListRequest();

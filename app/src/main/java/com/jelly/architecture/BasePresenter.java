@@ -1,7 +1,5 @@
 package com.jelly.architecture;
 
-public interface BasePresenter {
-
-    void start();
-
+public interface BasePresenter<T> {
+    void takeView(T view);
 }

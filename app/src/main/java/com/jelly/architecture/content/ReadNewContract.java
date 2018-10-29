@@ -6,11 +6,11 @@ import com.jelly.architecture.content.bean.NewContent;
 
 public interface ReadNewContract {
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends BasePresenter<View> {
 
     }
 
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseView {
         void showContent(NewContent content);
     }
 

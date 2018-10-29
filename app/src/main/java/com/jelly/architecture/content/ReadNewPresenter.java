@@ -1,23 +1,24 @@
 package com.jelly.architecture.content;
-import android.support.annotation.NonNull;
-
 import com.jelly.architecture.content.bean.NewContent;
+import com.jelly.architecture.di.ActivityScoped;
 import com.jelly.architecture.net.CommonRequest;
 
+import javax.inject.Inject;
+
+@ActivityScoped
 public class ReadNewPresenter implements ReadNewContract.Presenter {
 
-    private ReadNewModel model;
+    @Inject
+    ReadNewModel model;
     private ReadNewContract.View view;
-    private int newId;
+    @Inject
+    int newId;
 
-    public ReadNewPresenter(@NonNull ReadNewModel model, @NonNull ReadNewContract.View view, @NonNull int newId) {
-        this.model = model;
-        this.view = view;
-        this.newId = newId;
+    @Inject
+    public ReadNewPresenter() {
     }
 
-    @Override
-    public void start() {
+    private void start() {
         model.getNewContent(newId, new CommonRequest.CommonCallback<NewContent>() {
             @Override
             public void onResponse(NewContent response) {
@@ -32,4 +33,9 @@ public class ReadNewPresenter implements ReadNewContract.Presenter {
         });
     }
 
+    @Override
+    public void takeView(ReadNewContract.View view) {
+        this.view = view;
+        start();
+    }
 }
