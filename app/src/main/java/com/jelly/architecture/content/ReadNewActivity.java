@@ -14,6 +14,7 @@ import com.jelly.architecture.BaseActivity;
 import com.jelly.architecture.R;
 import com.jelly.architecture.content.bean.NewContent;
 import com.jelly.architecture.util.ColorUtils;
+import com.jelly.architecture.util.ToastUtils;
 
 import javax.inject.Inject;
 
@@ -45,6 +46,8 @@ public class ReadNewActivity extends BaseActivity implements ReadNewContract.Vie
     ReadNewContract.Presenter presenter;
 
     public static final String NEWID_KEY = "newId";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

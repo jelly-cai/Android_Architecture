@@ -23,12 +23,11 @@ import okhttp3.Response;
 public class CommonRequest {
 
     private OkHttpClient client = new OkHttpClient();
-    private final MediaType JSON
-            = MediaType.parse("application/json; charset=utf-8");
+    private MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private Handler mainHandler = new Handler(Looper.getMainLooper());
 
     @Inject
-    public CommonRequest(){
+    public CommonRequest() {
     }
 
     public <T> void post(String url, Object questBean, final CommonCallback<T> callback, final Class<T> tClass) {

@@ -10,10 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.jelly.architecture.BaseActivity;
+import com.jelly.architecture.MyApplication;
 import com.jelly.architecture.R;
 import com.jelly.architecture.content.ReadNewActivity;
 import com.jelly.architecture.listener.RVOnItemClickListener;
 import com.jelly.architecture.main.bean.NewsList;
+import com.jelly.architecture.util.ToastUtils;
 
 import javax.inject.Inject;
 
@@ -32,7 +34,6 @@ public class MvpMainActivity extends BaseActivity implements MainContract.View {
 
     @Inject
     MainContract.Presenter mainPresenter;
-
     private NewsAdapter adapter;
 
     @Override
